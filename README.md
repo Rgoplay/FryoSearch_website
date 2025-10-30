@@ -5,7 +5,7 @@ Small static website and PHP frontend for [FryoSearch ↗](https://fryonys.ovh/s
 ## Quick preview
 - Open [index.html](index.html) in your browser for the static UI.
 - For full search (requires PHP + local DB): run
-  php -S 127.0.0.1:8000
+  `php -S 127.0.0.1:8000`
   then open http://127.0.0.1:8000/search.php
 
 ## Files
