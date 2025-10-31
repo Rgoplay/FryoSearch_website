@@ -1,6 +1,6 @@
 # FryoSearch — Website
 
-Small static website and PHP frontend for [FryoSearch ↗](https://fryonys.ovh/search.php).
+Small search engine website with PHP frontend : [FryoSearch ↗](https://fryonys.ovh/search.php).
 
 ## Quick preview
 - For full search (requires PHP + local DB): run
