@@ -1,12 +1,110 @@
-h1 {
-    text-align: center;
-    color: #333;
-    font-size: 2em;
-    margin-top: 2em;
-    padding: 0;
+:root {
+    --primary-color: rgb(110, 170, 255);
+    --background: rgb(20, 20, 20);
+    --surface: #262626;
+    --text-color: white;
+    --text-secondary: rgb(220, 232, 255);
 }
 
-form {
+body {
+    font-family: Roboto, sans-serif;
+    background-color: var(--background);
+    color: var(--text-color);
+    margin: 0;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+h1 {
     text-align: center;
-    margin-top: 10em;
+    font-size: 2.5em;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-weight: 300;
+}
+
+.content-container {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+}
+
+.content-container > p {
+    color: rgb(159, 181, 194);
+    margin: 0 0 1rem 0;
+    font-size: 0.95em;
+}
+
+.statistics {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.stat-box {
+    background-color: var(--surface);
+    border-radius: 8px;
+    padding: 1.2rem 1.5rem;
+}
+
+.stat-number {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: var(--primary-color);
+    display: block;
+    margin-bottom: 0.3rem;
+}
+
+.stat-label {
+    font-size: 0.9em;
+    color: rgb(159, 181, 194);
+}
+
+.search-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    padding: 0.9rem 2rem;
+    background-color: var(--primary-color);
+    color: rgb(20, 20, 20);
+    text-decoration: none;
+    border-radius: 50px;
+    font-size: 1.1em;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 1.8em;
+    }
+    
+    .content-container {
+        max-width: 90%;
+    }
+    
+    .stat-box {
+        padding: 1rem;
+    }
+    
+    .stat-number {
+        font-size: 1.5em;
+    }
+    
+    .search-button {
+        font-size: 1em;
+        padding: 0.8rem 1.5rem;
+    }
 }
