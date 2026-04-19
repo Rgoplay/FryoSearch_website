@@ -6,6 +6,8 @@ $warningAccepted = false;
 if(isset($_COOKIE[$cookie_name]) && ($_COOKIE[$cookie_name] == $cookie_value)) {
     $warningAccepted = true;
 }
+
+$initial_text = trim($_GET ['search']);
 ?>
 <html lang="en">
 <head>
@@ -25,7 +27,7 @@ if(isset($_COOKIE[$cookie_name]) && ($_COOKIE[$cookie_name] == $cookie_value)) {
     <div id="searchBar">
     <h1>FryoSearch</h1>
     <form action="search.php" method="get">
-        <input placeholder="Enter your query" type="text" name="search" required id="searchbox" autofocus>
+        <?php echo '<input value="'.$initial_text.'" placeholder="Enter your query" type="text" name="search" required id="searchbox" autofocus>' ?> 
         <input type="submit" value="Search" id="searchButton">
     </form>
     </div>
@@ -62,7 +64,7 @@ if(isset($_COOKIE[$cookie_name]) && ($_COOKIE[$cookie_name] == $cookie_value)) {
     'è'=>'e', 'é'=>'e', 'ê'=>'e', 'ë'=>'e', 'ì'=>'i', 'í'=>'i', 'î'=>'i', 'ï'=>'i', 'ð'=>'o', 'ñ'=>'n', 'ò'=>'o', 'ó'=>'o', 'ô'=>'o', 'õ'=>'o', 'œ'=>'oe',
     'ö'=>'o', 'ø'=>'o', 'ù'=>'u', 'ú'=>'u', 'û'=>'u', 'ý'=>'y', 'þ'=>'b', 'ÿ'=>'y' );
 
-    $initial_text = trim($_GET ['search']);
+    
 
     $search = strtr($initial_text, $unwanted_array );
 
@@ -77,24 +79,17 @@ if(isset($_COOKIE[$cookie_name]) && ($_COOKIE[$cookie_name] == $cookie_value)) {
     $researchSplit = explode(" ", $search);
     $r = [];
 
-    // Generate i number of LIKE clause
-    $query_like = "";
-    for ($i=0; $i < count($researchSplit); $i++) {
-        $query_like .= "(title LIKE :element". $i . " OR url LIKE :element" . $i . ")";
-        if($i < count($researchSplit) - 1){
-            $query_like .= " OR ";
-        }
-    }
-    
-
-
-    $query = "SELECT url,title,domain,lang,pageRank,desc FROM indexed_url WHERE ";
-    $query .= $query_like." LIMIT 100000";
+    $query = "
+        SELECT t.url, t.title, t.domain, t.lang, t.pageRank, t.desc
+        FROM indexed_url t
+        INNER JOIN search_fts s ON t.rowid = s.rowid
+        WHERE search_fts MATCH :search
+        ORDER BY bm25(search_fts, 1, 5) ASC
+        LIMIT 10000
+    ";
     $prepared = $con->prepare($query);
-
-    for ($i=0; $i < count($researchSplit); $i++) {
-        $prepared->bindValue(":element" . $i, "%".$researchSplit[$i]."%", SQLITE3_TEXT);
-    }
+    $fts_query = implode(" OR ", array_filter($researchSplit));
+    $prepared->bindValue(':search', $fts_query, SQLITE3_TEXT);
 
     $fetch = $prepared->execute();
     while($i=$fetch->fetchArray()) {
@@ -243,7 +238,7 @@ if(isset($_COOKIE[$cookie_name]) && ($_COOKIE[$cookie_name] == $cookie_value)) {
     $answerL = array_slice($r, 0, 100);
 
     $end_time =  microtime(true);
-    $execution_time = round(($end_time - $start_time), 2, PHP_ROUND_HALF_EVEN);
+    $execution_time = round(($end_time - $start_time), 4, PHP_ROUND_HALF_EVEN);
     echo "<h3>".count($r)." results for: ".htmlspecialchars($initial_text)." in ".$execution_time." seconds </h3>";
     echo "<div class='results'>";
     foreach ($answerL as $row) {

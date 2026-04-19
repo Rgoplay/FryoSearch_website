@@ -1,16 +1,28 @@
+:root {
+    --primary-color: rgb(110, 170, 255);
+    --background: rgb(20, 20, 20);
+    --background-secondary: rgb(0, 0, 0);
+    --surface: #262626;
+    --text-color: white;
+    --text-secondary: rgb(220, 232, 255);
+    --text-tertiary: rgb(159, 181, 194);
+}
+
+
 body {
     font-family: Roboto, sans-serif;
-    background-color: rgb(20, 20, 20);
+    background-color: var(--background);
     margin: 0;
     padding: 0;
 }
 
 h1 {
     text-align: center;
-    color: rgb(110, 170, 255);
+    color: var(--primary-color);
     font-size: 110%;
     margin: 0px;
     padding: 0%;
+    font-weight: 700;
 }
 
 #searchBar {
@@ -24,7 +36,7 @@ h1 {
     margin-right: auto;
     padding: 1%;
     border-radius: 5em;
-    background-color: #262626;
+    background-color: var(--surface);
     width: 40em;
 }
 
@@ -34,35 +46,38 @@ form {
 }
 
 #searchbox, #loginbox {
-    width: 20em;
+    width: 25em;
     padding: 1% 3% 1% 3%;
     margin-right: 5%;
-    border-radius: 5em;
+    border-radius: 50px;
     font-size: 0.9em;
-    border-color: rgb(110, 170, 255);
+    border-color: var(--primary-color);
     border-width: 2px;
     border-style: solid;
+    background-color: var(--background);
+    color: var(--text-color);
 
 }
 
 #searchButton {
-    width: 5em ;
-    border-radius: 5em;
-    background-color: rgb(110, 170, 255);
-    color: white;
+    width: 5.5em ;
+    border-radius: 50px;
+    background-color: var(--primary-color);
+    color: var(--background);
     font-size: 0.9em;
-    font-weight: 700;
-    border-color: rgb(110, 170, 255);
-    border-width: 3px;
-    border-style: solid;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    padding: 0.7em;
+    text-align: center;
 }
 
 h3 {
     margin-left: 5%;
     margin-bottom: 3%;
-    color: white;
+    color: var(--text-color);
     text-decoration: underline;
-    text-decoration-color: rgb(110, 170, 255);
+    text-decoration-color: var(--primary-color);
     text-decoration-thickness: 0.18em;
     text-decoration-style: dotted;
     font-weight: 600;
@@ -86,7 +101,7 @@ h3 {
 }
 
 .title {
-    color: rgb(110, 170, 255);
+    color: var(--primary-color);
     text-decoration: none;
     font-size: 1.1em;
     overflow: hidden;
@@ -95,7 +110,7 @@ h3 {
 }
 
 .link {
-    color: rgb(220, 232, 255);
+    color: var(--text-secondary);
     overflow: hidden;
     white-space: nowrap; /* Don't forget this one */
     text-overflow: ellipsis;
@@ -115,7 +130,7 @@ h3 {
     margin-right: 10%;
     margin-bottom: 1.5%;
     padding: 1.5%;
-    background-color: #262626;
+    background-color: var(--surface);
     border-radius: 1em;
     display: flex;
     flex-direction: column;
@@ -150,7 +165,7 @@ h3 {
 
 
 p {
-    color: rgb(159, 181, 194);
+    color: var(--text-tertiary);
 }
 
 
