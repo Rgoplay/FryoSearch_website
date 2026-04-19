@@ -4,6 +4,7 @@
     --surface: #262626;
     --text-color: white;
     --text-secondary: rgb(220, 232, 255);
+    --text-tertiary: rgb(159, 181, 194);
 }
 
 body {
@@ -36,7 +37,7 @@ h1 {
 }
 
 .content-container > p {
-    color: rgb(159, 181, 194);
+    color: var(--text-tertiary);
     margin: 0 0 1rem 0;
     font-size: 0.95em;
 }
@@ -75,13 +76,21 @@ h1 {
     gap: 0.8rem;
     padding: 0.9rem 2rem;
     background-color: var(--primary-color);
-    color: rgb(20, 20, 20);
+    color: var(--background);
     text-decoration: none;
     border-radius: 50px;
     font-size: 1.1em;
     font-weight: 600;
     border: none;
     cursor: pointer;
+}
+
+footer {
+    text-align: center;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    color: var(--text-tertiary);
 }
 
 
