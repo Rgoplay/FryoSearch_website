@@ -8,7 +8,7 @@ Small search engine website with PHP frontend : [FryoSearch ↗](https://fryonys
   then open http://127.0.0.1:8000/search.php
 
 ## Files
-- [index.html](index.html) : home page (outdated)
+- [index.html](index.html) : home page
 - [search.php](search.php) : search UI (PHP, uses hostingDb.sqlite)
 - [index.css](index.css), [search.css](search.css) : styles
 - [search.xml](search.xml) : OpenSearch descriptor
@@ -28,7 +28,7 @@ The database has one table (named indexed_url) that has 7 columns:
     - 0.000006729621588583531
     - Article labellisé du jour Rayman est un jeu vidéo de plateformes en 2D à défilement horizontal...
 
-The DB has also a virtual table to run bm25 on named search_fts with two columns: url and title
+The DB has also a virtual table to run bm25 on, named search_fts with two columns: url and title
 The rows in the virtual table need to be in the same order as in the main table.
 
 
